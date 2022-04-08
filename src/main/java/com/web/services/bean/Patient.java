@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Patient {
 
 	private String name;
-	private long id;
+	private Long id;
 
 	public String getName() {
 		return name;
@@ -16,11 +16,11 @@ public class Patient {
 		this.name = name;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
