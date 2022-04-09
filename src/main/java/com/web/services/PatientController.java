@@ -2,13 +2,25 @@ package com.web.services;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.services.bean.Patient;
 
+@Consumes("application/xml, applicataion/json")
+@Produces("application/xml, applicataion/json")
 @RestController
 public class PatientController {
 
@@ -16,19 +28,30 @@ public class PatientController {
 	@Qualifier("myImplementation")
 	PatientService patientService;
 
-	@RequestMapping("/patients")
+	@GetMapping("/patients")
 	public List<Patient> getPatients() {
 		return patientService.getPatients();
 	}
 
-	@RequestMapping("/test")
-	public String test() {
-		return patientService.getTest();
+	@GetMapping("/patients/{id}")
+	public Patient getPatient(@PathVariable("id") long id) {
+		return patientService.getPatient(id);
 	}
 
-	@RequestMapping("/")
-	public String home() {
-		return "Hello World!";
+	@PostMapping("/patients")
+	@ResponseStatus(HttpStatus.OK)
+	public String createPatient(@RequestBody Patient patient) {
+		return patientService.createPatient(patient);
+	}
+
+	@PutMapping("/patients")
+	public String updatePatient(@RequestBody Patient patient) {
+		return patientService.updatePatient(patient);
+	}
+
+	@DeleteMapping("/patients/{id}")
+	public String deletePatient(@PathVariable("id") long id) {
+		return patientService.deletePatient(id);
 	}
 
 }
