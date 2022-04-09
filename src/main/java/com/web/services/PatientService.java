@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.NotFoundException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,7 @@ public class PatientService {
 	 */
 	public Patient getPatient(long id) {
 		if (patients.get(id) == null) {
-			throw new NotFoundException();
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
 		return patients.get(id);
 	}

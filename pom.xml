@@ -43,6 +43,17 @@
 			<version>2.1.1</version>
 		</dependency>
 
+		<!-- Below two have been added to remove exception - java.lang.ClassNotFoundException: 
+			org.glassfish.jersey.internal.RuntimeDelegateImp -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
