@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,13 +63,13 @@ public class PatientController {
 		return patientService.getPatient(id);
 	}
 
-	@PostMapping("/patients")
+	@PostMapping(value = "/patients", consumes = MediaType.APPLICATION_JSON)
 	@ResponseStatus(HttpStatus.OK)
 	public String createPatient(@RequestBody Patient patient) {
 		return patientService.createPatient(patient);
 	}
 
-	@PutMapping("/patients")
+	@PutMapping(value = "/patients", consumes = MediaType.APPLICATION_JSON)
 	public String updatePatient(@RequestBody Patient patient) {
 		return patientService.updatePatient(patient);
 	}
