@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.web.services.bean.Patient;
 
 @Service
-@Qualifier("myImplementation")
+@Qualifier("hospitalImplementation")
 public class PatientService {
 
 	Map<Long, Patient> patients = new HashMap<>();
@@ -29,6 +29,7 @@ public class PatientService {
 		Patient patient = new Patient();
 		patient.setId(id);
 		patient.setName("Swati Raghav");
+		patient.setEmail("s@r.com");
 		patients.put(patient.getId(), patient);
 	}
 
@@ -65,7 +66,7 @@ public class PatientService {
 		patient.setId(++id);
 		patients.put(patient.getId(), patient);
 		return "Patient - " + patient.getName() + " has been added Successfully. Please Note the ID - "
-				+ patient.getId();
+				+ patient.getId() + ". Email ID - " + patient.getEmail();
 	}
 
 	/*
@@ -80,9 +81,11 @@ public class PatientService {
 
 		if (selectedPatient != null) {
 			patients.put(patient.getId(), patient);
-			return "Patient with ID - " + patient.getId() + " has been updated to " + patient.getName();
+			return "Patient with ID - " + patient.getId() + " has been updated to " + patient.getName() + ", "
+					+ patient.getEmail();
 		} else {
-			return "Entry not found with ID - " + patient.getId() + ", " + patient.getName();
+			return "Entry not found with ID - " + patient.getId() + ", " + patient.getName() + ", "
+					+ patient.getEmail();
 		}
 	}
 

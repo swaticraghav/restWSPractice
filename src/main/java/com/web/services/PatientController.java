@@ -3,10 +3,7 @@ package com.web.services;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,7 +25,7 @@ import com.web.services.bean.Patient;
 public class PatientController {
 
 	@Autowired
-	@Qualifier("myImplementation")
+	@Qualifier("hospitalImplementation")
 	PatientService patientService;
 
 	@GetMapping("/patients")
@@ -38,27 +35,6 @@ public class PatientController {
 
 	@GetMapping("/patients/{id}")
 	public Patient getPatient(@PathVariable("id") long id) {
-
-		// Testing for Errors -
-		if (id == 999) {
-			throw new WebApplicationException(Response.Status.NOT_FOUND);
-		}
-		if (id == 998) {
-			throw new WebApplicationException(Response.Status.BAD_GATEWAY);
-		}
-		if (id == 997) {
-			throw new WebApplicationException(Response.Status.BAD_REQUEST);
-		}
-		if (id == 996) {
-			throw new WebApplicationException(Response.Status.EXPECTATION_FAILED);
-		}
-		if (id == 995) {
-			throw new WebApplicationException(Response.Status.SEE_OTHER);
-		}
-		if (id == 994) {
-			throw new NotFoundException();
-		}
-
 		return patientService.getPatient(id);
 	}
 
